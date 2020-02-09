@@ -1,0 +1,200 @@
+import { createElement, Component, ReactEventHandler, createRef } from "react";
+import { VideoProperties } from "react-native-video";
+import { openFullscreen } from "./utils/open-fullscreen";
+import { closeFullscreen } from "./utils/close-fullscreen";
+
+export type VideoSource = { uri?: string } | number;
+
+export class Video extends Component<VideoProperties> {
+	private _root = createRef<HTMLVideoElement>();
+
+	private get _url(): number | string | undefined {
+		const { source } = this.props;
+		return typeof source !== "number" ? source.uri : source;
+	}
+
+	public setNativeProps = () => {};
+
+	public seek = (time: number, _?: number) => {
+		const element = this._root.current;
+		if (element) {
+			element.currentTime = time;
+		}
+	};
+
+	public save = (): Promise<void> => {
+		console.log("Saving in local..");
+		return Promise.resolve();
+	};
+
+	public presentFullscreenPlayer = () => {
+		const element = this._root.current;
+		if (element) {
+			openFullscreen(element);
+		}
+	};
+
+	public dismissFullscreenPlayer = () => {
+		closeFullscreen();
+	};
+
+	componentDidMount() {
+		const { fullscreen, rate, seek } = this.props;
+		const element = this._root.current;
+
+		if (element) {
+			if (fullscreen) {
+				openFullscreen(element);
+			}
+
+			element.addEventListener("progress", this._onProgress);
+			element.addEventListener("seeking", this._onSeek);
+			element.addEventListener("ended", this._onEnd);
+
+			if (rate) {
+				element.playbackRate = rate;
+			}
+
+			if (seek) {
+				this.seek(seek);
+			}
+		}
+	}
+
+	componentDidUpdate(prevProps: VideoProperties) {
+		const { fullscreen, rate, seek, currentTime, paused } = this.props;
+		const element = this._root.current;
+
+		if (element) {
+			if (fullscreen !== prevProps.fullscreen) {
+				if (fullscreen) {
+					openFullscreen(element);
+				} else {
+					closeFullscreen();
+				}
+			}
+
+			if (rate !== prevProps.rate && rate) {
+				element.playbackRate = rate;
+
+				if (this.props.onPlaybackRateChange) {
+					this.props.onPlaybackRateChange({
+						playbackRate: rate
+					});
+				}
+			}
+
+			if (seek !== prevProps.seek && seek) {
+				element.currentTime = seek;
+			}
+
+			if (currentTime !== prevProps.currentTime && currentTime) {
+				element.currentTime = currentTime;
+			}
+
+			if (paused !== prevProps.paused && paused !== undefined) {
+				if (paused) {
+					element.pause();
+				} else {
+					element.play();
+				}
+			}
+		}
+	}
+
+	private _onProgress = () => {
+		const element = this._root.current;
+		if (this.props.onProgress && element) {
+			this.props.onProgress({
+				currentTime: element.currentTime,
+
+				// @todo add support for these values
+				playableDuration: 0,
+				seekableDuration: 0
+			});
+		}
+	};
+
+	private _onLoadStart = () => {
+		if (this.props.onLoadStart) {
+			this.props.onLoadStart();
+		}
+	};
+
+	private _onLoad: ReactEventHandler<HTMLVideoElement> = () => {
+		const element = this._root.current;
+		if (this.props.onLoad && element) {
+			this.props.onLoad({
+				canPlayFastForward: true,
+				canPlayReverse: true,
+				canPlaySlowForward: true,
+				canStepBackward: true,
+				canStepForward: true,
+				canPlaySlowReverse: true,
+				currentTime: element.currentTime,
+				duration: element.duration,
+				naturalSize: {
+					height: element.videoHeight,
+					width: element.videoWidth,
+					orientation: "horizontal"
+				}
+			});
+		}
+	};
+
+	private _onError = (error: any) => {
+		if (this.props.onError) {
+			this.props.onError({
+				error: {
+					"": "",
+					errorString:
+						error instanceof Error ? error.message : "Unexpected error"
+				}
+			});
+		}
+	};
+
+	private _onSeek = () => {
+		const element = this._root.current;
+		if (this.props.onSeek && element) {
+			this.props.onSeek({
+				currentTime: element.currentTime,
+
+				// @todo add support for these values
+				seekTime: 0,
+				target: 0
+			});
+		}
+	};
+
+	private _onEnd = () => {
+		if (this.props.onEnd) {
+			this.props.onEnd();
+		}
+	};
+
+	render = () => {
+		const { volume, muted, controls, paused, style } = this.props;
+
+		return createElement("video", {
+			src: this._url,
+			onLoadStart: this._onLoadStart,
+			onLoadedData: this._onLoad,
+			onError: this._onError,
+			onProgress: this._onProgress,
+			onSeeking: this._onSeek,
+			onEnded: this._onEnd,
+			onLoadedMetadata: this.props.onTimedMetadata,
+			onCanPlay: this.props.onReadyForDisplay,
+			onStalled: this.props.onPlaybackStalled,
+			volume,
+			controls,
+			ref: this._root,
+			paused,
+			muted,
+			autoPlay: !paused
+		});
+	};
+}
+
+export default Video;
