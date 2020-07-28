@@ -79,7 +79,7 @@ export class Video extends Component<VideoProperties> {
 
 				if (this.props.onPlaybackRateChange) {
 					this.props.onPlaybackRateChange({
-						playbackRate: rate
+						playbackRate: rate,
 					});
 				}
 			}
@@ -110,7 +110,7 @@ export class Video extends Component<VideoProperties> {
 
 				// @todo add support for these values
 				playableDuration: 0,
-				seekableDuration: 0
+				seekableDuration: 0,
 			});
 		}
 	};
@@ -136,8 +136,8 @@ export class Video extends Component<VideoProperties> {
 				naturalSize: {
 					height: element.videoHeight,
 					width: element.videoWidth,
-					orientation: "horizontal"
-				}
+					orientation: "horizontal",
+				},
 			});
 		}
 	};
@@ -148,8 +148,8 @@ export class Video extends Component<VideoProperties> {
 				error: {
 					"": "",
 					errorString:
-						error instanceof Error ? error.message : "Unexpected error"
-				}
+						error instanceof Error ? error.message : "Unexpected error",
+				},
 			});
 		}
 	};
@@ -162,7 +162,7 @@ export class Video extends Component<VideoProperties> {
 
 				// @todo add support for these values
 				seekTime: 0,
-				target: 0
+				target: 0,
 			});
 		}
 	};
@@ -174,7 +174,7 @@ export class Video extends Component<VideoProperties> {
 	};
 
 	render = () => {
-		const { volume, muted, controls, paused, style } = this.props;
+		const { volume, muted, controls, paused, style, poster } = this.props;
 
 		return createElement("video", {
 			src: this._url,
@@ -192,7 +192,9 @@ export class Video extends Component<VideoProperties> {
 			ref: this._root,
 			paused,
 			muted,
-			autoPlay: !paused
+			autoPlay: !paused,
+			styles: style,
+			poster: poster,
 		});
 	};
 }
