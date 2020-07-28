@@ -5,7 +5,11 @@ import { closeFullscreen } from "./utils/close-fullscreen";
 
 export type VideoSource = { uri?: string } | number;
 
-export class Video extends Component<VideoProperties> {
+interface Props extends VideoProperties {
+	poster?: string | Record<string, any> | undefined;
+}
+
+export class Video extends Component<Props> {
 	private _root = createRef<HTMLVideoElement>();
 
 	private get _url(): number | string | undefined {
@@ -193,8 +197,8 @@ export class Video extends Component<VideoProperties> {
 			paused,
 			muted,
 			autoPlay: !paused,
-			style,
-			poster: poster
+			styles: style,
+			poster
 		});
 	};
 }
