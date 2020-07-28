@@ -79,7 +79,7 @@ export class Video extends Component<VideoProperties> {
 
 				if (this.props.onPlaybackRateChange) {
 					this.props.onPlaybackRateChange({
-						playbackRate: rate,
+						playbackRate: rate
 					});
 				}
 			}
@@ -110,7 +110,7 @@ export class Video extends Component<VideoProperties> {
 
 				// @todo add support for these values
 				playableDuration: 0,
-				seekableDuration: 0,
+				seekableDuration: 0
 			});
 		}
 	};
@@ -136,8 +136,8 @@ export class Video extends Component<VideoProperties> {
 				naturalSize: {
 					height: element.videoHeight,
 					width: element.videoWidth,
-					orientation: "horizontal",
-				},
+					orientation: "horizontal"
+				}
 			});
 		}
 	};
@@ -148,8 +148,8 @@ export class Video extends Component<VideoProperties> {
 				error: {
 					"": "",
 					errorString:
-						error instanceof Error ? error.message : "Unexpected error",
-				},
+						error instanceof Error ? error.message : "Unexpected error"
+				}
 			});
 		}
 	};
@@ -162,7 +162,7 @@ export class Video extends Component<VideoProperties> {
 
 				// @todo add support for these values
 				seekTime: 0,
-				target: 0,
+				target: 0
 			});
 		}
 	};
@@ -193,8 +193,8 @@ export class Video extends Component<VideoProperties> {
 			paused,
 			muted,
 			autoPlay: !paused,
-			styles: style,
-			poster: poster,
+			style,
+			poster: poster
 		});
 	};
 }
