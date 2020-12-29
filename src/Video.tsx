@@ -198,7 +198,8 @@ export class Video extends Component<Props> {
 			muted,
 			autoPlay: !paused,
 			styles: style,
-			poster
+			poster,
+			playsinline: true
 		});
 	};
 }
