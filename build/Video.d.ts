@@ -40,7 +40,7 @@ export declare class Video extends Component<Props> {
         autoPlay: boolean;
         styles: import("react-native").StyleProp<import("react-native").ViewStyle>;
         poster: string | undefined;
-        playsinline: boolean;
+        playsInline: boolean;
     }, HTMLVideoElement>;
 }
 export default Video;

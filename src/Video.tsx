@@ -197,7 +197,7 @@ export class Video extends Component<Props> {
 			autoPlay: !paused,
 			styles: style,
 			poster,
-			playsinline: true
+			playsInline: true
 		});
 	};
 }
