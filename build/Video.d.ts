@@ -1,9 +1,11 @@
-import { Component } from 'react';
-import { VideoProperties } from 'react-native-video';
+import { Component } from "react";
+import { VideoProperties } from "react-native-video";
 export declare type VideoSource = {
     uri?: string;
 } | number;
-export declare class Video extends Component<VideoProperties> {
+interface Props extends VideoProperties {
+}
+export declare class Video extends Component<Props> {
     private _root;
     private get _url();
     setNativeProps: () => void;
@@ -19,7 +21,7 @@ export declare class Video extends Component<VideoProperties> {
     private _onError;
     private _onSeek;
     private _onEnd;
-    render(): import("react").DOMElement<{
+    render: () => import("react").DetailedReactHTMLElement<{
         src: string | number | undefined;
         onLoadStart: () => void;
         onLoadedData: (event: import("react").SyntheticEvent<HTMLVideoElement, Event>) => void;
@@ -33,10 +35,12 @@ export declare class Video extends Component<VideoProperties> {
         volume: number | undefined;
         controls: boolean | undefined;
         ref: import("react").RefObject<HTMLVideoElement>;
-        style: import("react-native").StyleProp<import("react-native").ViewStyle>;
         paused: boolean | undefined;
         muted: boolean | undefined;
         autoPlay: boolean;
+        styles: import("react-native").StyleProp<import("react-native").ViewStyle>;
+        poster: string | undefined;
+        playsinline: boolean;
     }, HTMLVideoElement>;
 }
 export default Video;

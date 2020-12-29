@@ -1,6 +1,6 @@
 {
 	"name": "react-native-web-video",
-	"version": "1.0.0-a",
+	"version": "1.0.0-b",
 	"description": "A <Video /> element for react-native-web inspired in react-native-video",
 	"main": "build/index.js",
 	"types": "build/index.d.ts",
@@ -57,11 +57,11 @@
 		"react-native-web": "0.12.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "7.8.4",
-		"@babel/core": "7.8.4",
-		"@babel/plugin-proposal-class-properties": "7.8.3",
-		"@babel/preset-env": "7.8.4",
-		"@babel/preset-typescript": "7.8.3",
+		"@babel/cli": "7.8.7",
+		"@babel/core": "7.8.7",
+		"@babel/plugin-proposal-class-properties": "7.8.7",
+		"@babel/preset-env": "7.8.7",
+		"@babel/preset-typescript": "7.8.7",
 		"@storybook/addon-knobs": "5.3.9",
 		"@storybook/addons": "5.3.9",
 		"@storybook/react": "5.3.9",
@@ -72,7 +72,7 @@
 		"@typescript-eslint/eslint-plugin": "2.19.0",
 		"@typescript-eslint/parser": "2.19.0",
 		"babel-eslint": "10.0.3",
-		"babel-loader": "8.0.6",
+		"babel-loader": "^8.2.2",
 		"babel-plugin-typescript-to-proptypes": "1.2.1",
 		"eslint": "6.8.0",
 		"eslint-config-react-app": "5.2.0",
@@ -91,5 +91,8 @@
 		"rimraf": "3.0.2",
 		"ts-loader": "6.2.1",
 		"typescript": "3.7.5"
+	},
+	"resolutions": {
+		"@babel/preset-env": "^7.8.7"
 	}
 }

@@ -5,9 +5,7 @@ import { closeFullscreen } from "./utils/close-fullscreen";
 
 export type VideoSource = { uri?: string } | number;
 
-interface Props extends VideoProperties {
-	poster?: string | Record<string, any> | undefined;
-}
+interface Props extends VideoProperties {}
 
 export class Video extends Component<Props> {
 	private _root = createRef<HTMLVideoElement>();
