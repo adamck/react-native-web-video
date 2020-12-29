@@ -198,7 +198,7 @@ export class Video extends Component<Props> {
 			paused,
 			muted,
 			autoPlay: !paused,
-			styles: style,
+			style,
 			poster,
 			playsInline: true
 		});

@@ -21,7 +21,7 @@ export declare class Video extends Component<Props> {
     private _onError;
     private _onSeek;
     private _onEnd;
-    render: () => import("react").DetailedReactHTMLElement<{
+    render: () => import("react").DOMElement<{
         src: string | number | undefined;
         onLoadStart: () => void;
         onLoadedData: (event: import("react").SyntheticEvent<HTMLVideoElement, Event>) => void;
@@ -38,7 +38,7 @@ export declare class Video extends Component<Props> {
         paused: boolean | undefined;
         muted: boolean | undefined;
         autoPlay: boolean;
-        styles: import("react-native").StyleProp<import("react-native").ViewStyle>;
+        style: import("react-native").StyleProp<import("react-native").ViewStyle>;
         poster: string | undefined;
         playsInline: boolean;
     }, HTMLVideoElement>;
