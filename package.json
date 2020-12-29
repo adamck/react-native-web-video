@@ -1,6 +1,6 @@
 {
 	"name": "react-native-web-video",
-	"version": "1.0.0-c",
+	"version": "1.0.0-d",
 	"description": "A <Video /> element for react-native-web inspired in react-native-video",
 	"main": "build/index.js",
 	"types": "build/index.d.ts",

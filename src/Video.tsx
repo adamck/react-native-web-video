@@ -49,7 +49,8 @@ export class Video extends Component<Props> {
 				openFullscreen(element);
 			}
 
-			element.addEventListener("progress", this._onProgress);
+			// element.addEventListener("progress", this._onProgress);
+			element.addEventListener("timeupdate", this._onProgress);
 			element.addEventListener("seeking", this._onSeek);
 			element.addEventListener("ended", this._onEnd);
 
@@ -104,11 +105,13 @@ export class Video extends Component<Props> {
 		}
 	}
 
-	private _onProgress = () => {
-		const element = this._root.current;
-		if (this.props.onProgress && element) {
+	private _onProgress = (event: any) => {
+		// const element = this._root.current;
+
+		if (this.props.onProgress) {
 			this.props.onProgress({
-				currentTime: element.currentTime,
+				// currentTime: element.currentTime,
+				currentTime: event.timeStamp,
 
 				// @todo add support for these values
 				playableDuration: 0,

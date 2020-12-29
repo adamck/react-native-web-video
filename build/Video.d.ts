@@ -26,7 +26,7 @@ export declare class Video extends Component<Props> {
         onLoadStart: () => void;
         onLoadedData: (event: import("react").SyntheticEvent<HTMLVideoElement, Event>) => void;
         onError: (error: any) => void;
-        onProgress: () => void;
+        onProgress: (event: any) => void;
         onSeeking: () => void;
         onEnded: () => void;
         onLoadedMetadata: (() => void) | undefined;
