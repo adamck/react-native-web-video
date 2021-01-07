@@ -106,12 +106,12 @@ export class Video extends Component<Props> {
 	}
 
 	private _onProgress = (event: any) => {
-		// const element = this._root.current;
+		const element = this._root.current;
 
 		if (this.props.onProgress) {
 			this.props.onProgress({
-				// currentTime: element.currentTime,
-				currentTime: event.timeStamp,
+				currentTime: element!.currentTime,
+				// timeStamp: event.timeStamp,
 
 				// @todo add support for these values
 				playableDuration: 0,
