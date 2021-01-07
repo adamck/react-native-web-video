@@ -179,9 +179,18 @@ export class Video extends Component<Props> {
 	};
 
 	render = () => {
-		const { volume, muted, controls, paused, style, poster } = this.props;
+		const {
+			volume,
+			muted,
+			repeat,
+			controls,
+			paused,
+			style,
+			poster
+		} = this.props;
 
 		return createElement("video", {
+			ref: this._root,
 			src: this._url,
 			onLoadStart: this._onLoadStart,
 			onLoadedData: this._onLoad,
@@ -194,9 +203,9 @@ export class Video extends Component<Props> {
 			onStalled: this.props.onPlaybackStalled,
 			volume,
 			controls,
-			ref: this._root,
 			paused,
 			muted,
+			loop: repeat,
 			autoPlay: !paused,
 			style,
 			poster,
